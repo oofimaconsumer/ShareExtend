@@ -32,6 +32,17 @@
             }
         
             if ([shareType isEqualToString:@"text"]) {
+                NSArray *items = [NSArray array];
+                for (id item in array) {
+                    if ([item isKindOfClass:[NSString class]]) {
+                        NSURL *url = [NSURL URLWithString:item];
+                        if (url != nil && url.scheme != nil && url.host != nil) {
+                            [items addObject:url];
+                            continue;
+                        }
+                    }
+                    [items addObject:item];
+                }
                 [self share:array atSource:originRect withSubject:subject];
                 result(nil);
             }  else if ([shareType isEqualToString:@"image"]) {
