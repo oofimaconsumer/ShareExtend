@@ -32,7 +32,7 @@
             }
         
             if ([shareType isEqualToString:@"text"]) {
-                NSArray *items = [NSArray array];
+                NSMutableArray *items = [NSMutableArray array];
                 for (id item in array) {
                     if ([item isKindOfClass:[NSString class]]) {
                         NSURL *url = [NSURL URLWithString:item];
@@ -43,7 +43,7 @@
                     }
                     [items addObject:item];
                 }
-                [self share:array atSource:originRect withSubject:subject];
+                [self share:[items copy] atSource:originRect withSubject:subject];
                 result(nil);
             }  else if ([shareType isEqualToString:@"image"]) {
                 NSMutableArray * imageArray = [[NSMutableArray alloc] init];
